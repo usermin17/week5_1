@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Week5_1</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="main">
+      <h1>India- Through its cities </h1>
+      <hr />
+      <div id="data-container"></div>
+    </div>
+    <script>
+      fetch("https://api.npoint.io/7bbd3a59c401f616bb89")
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("API response data:", data);
+          displayData(data.places);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
+
+      function displayData(places) {
+        const container = document.getElementById("data-container");
+        places.forEach((place) => {
+          const postElement = document.createElement("div");
+          postElement.innerHTML = `
+              <h2>Name of the City: ${place.name}</h2>
+              <p>About: ${place.info}</p>
+              <h3>A look at the City</h3>
+              <img src="${place.image}" alt="${place.name}"/>
+              <hr/>`;
+          container.appendChild(postElement);
+        });
+      }
+    </script>
+  </body>
+</html>
